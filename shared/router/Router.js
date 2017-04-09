@@ -10,26 +10,6 @@ import AnimatedView from './Animation.js';
 
 class Routes extends Component {
 
-	state = {
-		anim: new Animated.Value(0),
-		animating: false
-	}
-
-    componentWillReceiveProps(nextProps) {
-		if (nextProps.location !== this.props.location) {
-        	setTimeout(() => this.setState({ anim: new Animated.Value(0) } , () => Animated.timing(this.state.anim, {
-				toValue: 1,
-				duration: 350
-      		}).start()), 500);
-    	}
-  	}
-    
-	componentDidUpdate(prevProps, prevState) {
-		if (prevState.currentLocation !== this.state.currentLocation) {
-			this.setState({ animating: false });
-    	}
-	}
-
 	renderPrevPage = (path) => {
 		switch (path) {
 			case '/':
@@ -44,13 +24,10 @@ class Routes extends Component {
 	}
 
     render(){
-		const { anim, animating } = this.state;
 		const { location } = this.props;
 
         return (
             <AnimatedView
-				anim={anim}
-				animating={animating}
 				location={location}
 				prevPage={this.renderPrevPage}
 			>

@@ -4,15 +4,26 @@ import { Switch, Route, withRouter } from 'react-router-native';
 
 export default class AnimatedView extends Component {
 
-    state = {
-        prevLocation: null
-    }
+	state = {
+		anim: new Animated.Value(0),
+		prevLocation: null,
+        animating: false
+	}
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.location !== this.props.location) {
-            this.setState({ prevLocation: this.props.location});
-        }
-    }
+		if (nextProps.location !== this.props.location) {
+            this.setState({ prevLocation: this.props.location, animating: true }, () =>
+                Animated.timing(this.state.anim, {
+                    toValue: 1,
+                    duration: 350
+                }).start(() => this.setState({
+                    animating: false,
+                    anim: new Animated.Value(0),
+                    prevLocation: nextProps.location
+                }))
+            );
+    	}
+  	}
 
     renderStatic = (component) => {
         return (
@@ -29,7 +40,7 @@ export default class AnimatedView extends Component {
     }
     
     renderAnimatedOld = (component) => {
-        const { anim } = this.props;
+        const { anim } = this.state;
 
         return component
             ? (<Animated.View
@@ -49,7 +60,7 @@ export default class AnimatedView extends Component {
     }
 
     renderAnimatedNew = (component) => {
-        const { anim } = this.props;
+        const { anim } = this.state;
 
         return component
             ? (<Animated.View
@@ -70,18 +81,20 @@ export default class AnimatedView extends Component {
 
     render() {
         const { children, prevPage } = this.props;
-        const { prevLocation } = this.state;
+        const { prevLocation, animating } = this.state;
 
         const oldChild = prevLocation ? prevPage(prevLocation.pathname) : children;
         const newChild = prevLocation ?  children : null;
 
         return (
             <View>
-                {prevLocation && newChild
+                {animating
                     ? this.renderAnimatedOld(oldChild)
                     : this.renderStatic(oldChild)}
 
-                {this.renderAnimatedNew(newChild)}
+                {animating
+                    ? this.renderAnimatedNew(newChild)
+                    : null}
             </View>
         );
     }

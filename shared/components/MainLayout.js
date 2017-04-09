@@ -6,9 +6,7 @@ import Router from '../router/Router.js';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "transparent",
-    borderWidth: 2,
-    borderColor: 'red',
+    backgroundColor: "transparent"
   }
 });
 
