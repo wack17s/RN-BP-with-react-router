@@ -24,11 +24,12 @@ class Routes extends Component {
 	}
 
     render(){
-		const { location } = this.props;
+		const { location, history } = this.props;
 
         return (
             <AnimatedView
 				location={location}
+				history={history}
 				prevPage={this.renderPrevPage}
 			>
 				<Switch>
