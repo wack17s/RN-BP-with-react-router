@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-native';
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: 300,
-    backgroundColor: 'red',
-    width: 360
-  }
+	container: {
+        height: 300,
+        width: Dimensions.get('window').width,
+		backgroundColor: 'red',
+		justifyContent: "center",
+		alignItems: "center"
+	}
 });
 
 export default class Home extends Component {
@@ -26,7 +26,7 @@ export default class Home extends Component {
                 </Link>
                 
                 <Text>-------------------------</Text>
-                
+
                 <Link to='/some2'>
                     <Text>Go to Some Page 2</Text>
                 </Link>

@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-native'
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: 300,
-    backgroundColor: 'yellow',
-    width: 360,
-    
-  }
+    container: {
+        height: 300,
+        width: Dimensions.get('window').width,
+        backgroundColor: 'yellow',
+        justifyContent: "center",
+        alignItems: "center"
+    }
 });
 
 export default class Home extends Component {

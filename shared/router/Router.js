@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Animated } from 'react-native';
 import { Switch, Route, withRouter } from 'react-router-native';
 
-import Home from '../components/pages/Home.js';
+import Home      from '../components/pages/Home.js';
 import SomePage1 from '../components/pages/SomePage1.js';
 import SomePage2 from '../components/pages/SomePage2.js';
 
@@ -15,17 +15,11 @@ class Routes extends Component {
 		animating: false
 	}
 
-	componentDidMount() {
-		Animated.timing(this.state.anim, {
-				toValue: 1
-      		}).start();
-	}
-
-    componentWillUpdate(nextProps) {
+    componentWillReceiveProps(nextProps) {
 		if (nextProps.location !== this.props.location) {
-			console.log('wtf')
         	this.setState({ anim: new Animated.Value(0) } , () => Animated.timing(this.state.anim, {
-				toValue: 1
+				toValue: 1,
+				duration: 200
       		}).start());
     	}
   	}
@@ -36,26 +30,29 @@ class Routes extends Component {
     	}
 	}
 
-	handleCurrentRoute = (pageName, { location }) => {
-		console.log('location', location)
-		const pages = {
-			home: <Home />,
-			some1: <SomePage1 />,
-			some2: <SomePage2 />
-		};
-
-		this.setState({
-			currentLocation: location
-		});
-		
-		return pages[pageName];
+	renderPrevPage = (path) => {
+		switch (path) {
+			case '/':
+				return <Home />;
+			case '/some1':
+				return <SomePage1 />;
+			case '/some2':
+				return <SomePage2 />;
+			default:
+				return <Home />;
+		}
 	}
 
     render(){
+		const { anim, animating } = this.state;
+		const { location } = this.props;
+
         return (
             <AnimatedView
-				anim={this.state.anim}
-				animating={this.state.animating}
+				anim={anim}
+				animating={animating}
+				location={location}
+				prevPage={this.renderPrevPage}
 			>
 				<Switch>
 					<Route exact path="/" component={Home} />
