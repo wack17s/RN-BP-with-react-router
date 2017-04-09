@@ -17,10 +17,10 @@ class Routes extends Component {
 
     componentWillReceiveProps(nextProps) {
 		if (nextProps.location !== this.props.location) {
-        	this.setState({ anim: new Animated.Value(0) } , () => Animated.timing(this.state.anim, {
+        	setTimeout(() => this.setState({ anim: new Animated.Value(0) } , () => Animated.timing(this.state.anim, {
 				toValue: 1,
-				duration: 200
-      		}).start());
+				duration: 350
+      		}).start()), 500);
     	}
   	}
     
