@@ -2,21 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-native';
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 
-const styles = StyleSheet.create({
-    container: {
-        height: 300,
-        width: Dimensions.get('window').width,
-        backgroundColor: 'gray',
-        justifyContent: "center",
-        alignItems: "center"
-    }
-});
+import Wrapper from '../other/Wrapper.js';
 
 export default class Home extends Component {
 
     render(){
         return (
-            <View style={styles.container}>
+            <Wrapper style='background-color: grey;'>
                 <Text style={{ fontSize: 18 }}>Launch page</Text>
 
                 <Text>-------------------------</Text>
@@ -26,11 +18,11 @@ export default class Home extends Component {
                 </Link>
 
                 <Text>-------------------------</Text>
-                
+
                 <Link to='/some2'>
                     <Text>Go to Some Page 2</Text>
                 </Link>
-            </View>
+            </Wrapper>
         );
     }
 }

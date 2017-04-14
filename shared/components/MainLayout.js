@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, Button } from "react-native";
 
 import Router from '../router/Router.js';
 
+import Wrapper from './other/Wrapper.js';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -15,17 +17,17 @@ export default class MainLayout extends Component {
     render(){
         return (
             <View style={styles.container}>
-                <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                <Wrapper>
                     <Text style={{ fontSize: 20 }}>H E A D E R</Text>
-                </View>
+                </Wrapper>
 
-                <View style={{ flex: 3 }}>
+                <Wrapper flex={3}>
                     <Router />
-                </View>
-                
-                <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                </Wrapper>
+
+                <Wrapper>
                     <Text style={{ fontSize: 20 }}>F O O T E R</Text>
-                </View>
+                </Wrapper>
             </View>
         );
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Animated } from 'react-native';
-import { Switch, Route, withRouter } from 'react-router-native';
+import { Switch, Route, withRouter, Link } from 'react-router-native';
+import { Navigation, Card } from 'react-router-navigation'
 
 import Home      from '../components/pages/Home.js';
 import SomePage1 from '../components/pages/SomePage1.js';
@@ -27,17 +28,17 @@ class Routes extends Component {
 		const { location, history } = this.props;
 
         return (
-            <AnimatedView
-				location={location}
-				history={history}
-				prevPage={this.renderPrevPage}
-			>
-				<Switch>
-					<Route exact path="/" component={Home} />
-					<Route path="/some1" component={SomePage1} />
-					<Route path="/some2" component={SomePage2} />
-				</Switch>
-            </AnimatedView>
+            <Navigation>
+              <Card
+                exact
+                path="/"
+                render={() => <Link to="/hello">Press it</Link>}
+              />
+              <Card
+                path="/hello"
+                render={() => <Text>Hello</Text>}
+              />
+            </Navigation>
         );
     }
 }

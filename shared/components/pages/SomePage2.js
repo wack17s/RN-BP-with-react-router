@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-native'
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 
+import Wrapper from '../other/Wrapper.js';
+
 const styles = StyleSheet.create({
     container: {
         height: 300,
@@ -16,7 +18,7 @@ export default class Home extends Component {
 
     render(){
         return (
-            <View style={styles.container}>
+            <Wrapper style='background-color: yellow;'>
                 <Text style={{ fontSize: 18 }}>Some Page 2</Text>
 
                 <Text>-------------------------</Text>
@@ -24,13 +26,13 @@ export default class Home extends Component {
                 <Link to='/'>
                     <Text>Go to Home</Text>
                 </Link>
-                
+
                 <Text>-------------------------</Text>
-                
+
                 <Link to='/some1'>
                     <Text>Go to Some Page 1</Text>
                 </Link>
-            </View>
+            </Wrapper>
         );
     }
 }

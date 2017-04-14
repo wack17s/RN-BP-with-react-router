@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, Animated, Dimensions } from 'react-native';
 import { Switch, Route, withRouter } from 'react-router-native';
 
+import Wrapper from '../components/other/Wrapper.js';
+
 export default class AnimatedView extends Component {
 
 	state = {
@@ -32,7 +34,7 @@ export default class AnimatedView extends Component {
 
     renderStatic = (component) => {
         return (
-            <View
+            <Wrapper
                 style={{
                     position: 'absolute',
                     justifyContent: "center",
@@ -40,10 +42,10 @@ export default class AnimatedView extends Component {
                 }}
             >
                 {component}
-            </View>
+            </Wrapper>
         );
     }
-    
+
     renderAnimatedOld = (component) => {
         const { anim, direction } = this.state;
 
@@ -65,7 +67,7 @@ export default class AnimatedView extends Component {
                         : {
                             left: anim.interpolate({
                                 inputRange: [ 0, 1 ],
-                                outputRange: [ 0, Dimensions.get('window').width ]
+                                outputRange: [ 0, 300 ]
                             })
                         }
                 ]}
@@ -90,7 +92,7 @@ export default class AnimatedView extends Component {
                         ? {
                             left: anim.interpolate({
                                 inputRange: [ 0, 1 ],
-                                outputRange: [ Dimensions.get('window').width, 0 ]
+                                outputRange: [ 300, 0 ]
                             })
                         }
                         : {
@@ -114,7 +116,7 @@ export default class AnimatedView extends Component {
         const newChild = prevLocation ?  children : null;
 
         return (
-            <View>
+            <Wrapper>
                 {animating
                     ? this.renderAnimatedOld(oldChild)
                     : this.renderStatic(oldChild)}
@@ -122,7 +124,7 @@ export default class AnimatedView extends Component {
                 {animating
                     ? this.renderAnimatedNew(newChild)
                     : null}
-            </View>
+            </Wrapper>
         );
     }
 
@@ -134,7 +136,7 @@ export default class AnimatedView extends Component {
         const newChild = prevLocation ?  children : null;
 
         return (
-            <View>
+            <Wrapper>
                 {animating
                     ? this.renderAnimatedNew(newChild)
                     : null}
@@ -142,7 +144,7 @@ export default class AnimatedView extends Component {
                 {animating
                     ? this.renderAnimatedOld(oldChild)
                     : this.renderStatic(oldChild)}
-            </View>
+            </Wrapper>
         );
     }
 
