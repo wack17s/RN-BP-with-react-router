@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import { View, Text, Animated, Dimensions } from 'react-native';
-import { Switch, Route, withRouter } from 'react-router-native';
+// test example of animation
 
+import React, { Component } from 'react';
+import { View, Animated } from 'react-native';
 import Wrapper from '../components/other/Wrapper.js';
 
 export default class AnimatedView extends Component {
 
-	state = {
-		anim: new Animated.Value(0),
-		prevLocation: null,
+    state = {
+        anim: new Animated.Value(0),
+        prevLocation: null,
         animating: false,
         direction: 'forward'
-	}
+    }
 
     componentWillReceiveProps(nextProps) {
-		if (nextProps.location !== this.props.location) {
+        if (nextProps.location !== this.props.location) {
             this.setState({
                 prevLocation: this.props.location,
                 direction: this.props.history.action === 'PUSH' ? 'forward' : 'backward',
@@ -29,8 +29,8 @@ export default class AnimatedView extends Component {
                     prevLocation: nextProps.location
                 }))
             );
-    	}
-  	}
+        }
+      }
 
     renderStatic = (component) => {
         return (
@@ -115,7 +115,6 @@ export default class AnimatedView extends Component {
         const oldChild = prevLocation ? prevPage(prevLocation.pathname) : children;
         const newChild = prevLocation ?  children : null;
 
-<<<<<<< HEAD
         if (direction === 'forward') {
             return (
                 <View>
@@ -141,40 +140,6 @@ export default class AnimatedView extends Component {
                 </View>
             );
         }
-
-=======
-        return (
-            <Wrapper>
-                {animating
-                    ? this.renderAnimatedOld(oldChild)
-                    : this.renderStatic(oldChild)}
-
-                {animating
-                    ? this.renderAnimatedNew(newChild)
-                    : null}
-            </Wrapper>
-        );
-    }
-
-    renderBackward = () => {
-        const { children, prevPage } = this.props;
-        const { prevLocation, animating } = this.state;
-
-        const oldChild = prevLocation ? prevPage(prevLocation.pathname) : children;
-        const newChild = prevLocation ?  children : null;
-
-        return (
-            <Wrapper>
-                {animating
-                    ? this.renderAnimatedNew(newChild)
-                    : null}
-
-                {animating
-                    ? this.renderAnimatedOld(oldChild)
-                    : this.renderStatic(oldChild)}
-            </Wrapper>
-        );
->>>>>>> be9a8ce9a20cb1b2878f59ed68d6987d0c15fba1
     }
 
     render() {
