@@ -11,13 +11,25 @@
     "react-native": "0.42.2",
     "react-redux": "^5.0.3",
     "react-router-native": "^4.0.0",
+    "react-router-navigation": "^1.0.0-beta.3",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "styled-components": "^1.4.4"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",
     "babel-preset-react-native": "1.9.1",
-    "jest": "19.0.2"
+    "babel-eslint": "^6.1.0",
+    "eslint": "^3.3.1",
+    "eslint-config-webbylab": "^2.0.1",
+    "eslint-plugin-fetch": "0.0.1",
+    "eslint-plugin-import": "^1.14.0",
+    "eslint-plugin-more": "^0.1.1",
+    "eslint-plugin-no-require-lodash": "^1.1.0",
+    "eslint-plugin-prefer-spread": "^1.0.3",
+    "eslint-plugin-react": "^6.1.2",
+    "jest": "19.0.2",
+    "react-test-renderer": "15.4.2"
   },
   "jest": {
     "preset": "react-native"
