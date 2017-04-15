@@ -27,17 +27,16 @@ class Routes extends Component {
 		const { location, history } = this.props;
 
         return (
-            <AnimatedView
-				location={location}
-				history={history}
-				prevPage={this.renderPrevPage}
-			>
 				<Switch>
 					<Route exact path="/" component={Home} />
-					<Route path="/some1" component={SomePage1} />
-					<Route path="/some2" component={SomePage2} />
+					<Route path="/some1" component={() =>
+						<View>
+							<SomePage1 />
+							<Route path="/some1/some2" component={SomePage2} />
+							<Route path="/some1/home" component={Home} />
+						</View>
+					} />
 				</Switch>
-            </AnimatedView>
         );
     }
 }

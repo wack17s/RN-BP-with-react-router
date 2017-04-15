@@ -106,44 +106,39 @@ export default class AnimatedView extends Component {
             : null;
     }
 
-    renderForward = () => {
+    renderAnimation = (direction) => {
         const { children, prevPage } = this.props;
         const { prevLocation, animating } = this.state;
 
         const oldChild = prevLocation ? prevPage(prevLocation.pathname) : children;
         const newChild = prevLocation ?  children : null;
 
-        return (
-            <View>
-                {animating
-                    ? this.renderAnimatedOld(oldChild)
-                    : this.renderStatic(oldChild)}
+        if (direction === 'forward') {
+            return (
+                <View>
+                    {animating
+                        ? this.renderAnimatedOld(oldChild)
+                        : this.renderStatic(oldChild)}
 
-                {animating
-                    ? this.renderAnimatedNew(newChild)
-                    : null}
-            </View>
-        );
-    }
+                    {animating
+                        ? this.renderAnimatedNew(newChild)
+                        : null}
+                </View>
+            );
+        } else if (direction === 'backward') {
+            return (
+                <View>
+                    {animating
+                        ? this.renderAnimatedNew(newChild)
+                        : null}
 
-    renderBackward = () => {
-        const { children, prevPage } = this.props;
-        const { prevLocation, animating } = this.state;
+                    {animating
+                        ? this.renderAnimatedOld(oldChild)
+                        : this.renderStatic(oldChild)}
+                </View>
+            );
+        }
 
-        const oldChild = prevLocation ? prevPage(prevLocation.pathname) : children;
-        const newChild = prevLocation ?  children : null;
-
-        return (
-            <View>
-                {animating
-                    ? this.renderAnimatedNew(newChild)
-                    : null}
-
-                {animating
-                    ? this.renderAnimatedOld(oldChild)
-                    : this.renderStatic(oldChild)}
-            </View>
-        );
     }
 
     render() {
@@ -153,9 +148,6 @@ export default class AnimatedView extends Component {
         const oldChild = prevLocation ? prevPage(prevLocation.pathname) : children;
         const newChild = prevLocation ?  children : null;
 
-        return direction === 'forward'
-            ? this.renderForward()
-            : this.renderBackward()
-        ;
+        return this.renderAnimation(direction);
     }
 }
