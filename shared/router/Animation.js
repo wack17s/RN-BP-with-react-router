@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, Animated, Dimensions } from 'react-native';
 import { Switch, Route, withRouter } from 'react-router-native';
 
+import Wrapper from '../components/other/Wrapper.js';
+
 export default class AnimatedView extends Component {
 
 	state = {
@@ -32,7 +34,7 @@ export default class AnimatedView extends Component {
 
     renderStatic = (component) => {
         return (
-            <View
+            <Wrapper
                 style={{
                     position: 'absolute',
                     justifyContent: "center",
@@ -40,10 +42,10 @@ export default class AnimatedView extends Component {
                 }}
             >
                 {component}
-            </View>
+            </Wrapper>
         );
     }
-    
+
     renderAnimatedOld = (component) => {
         const { anim, direction } = this.state;
 
@@ -65,7 +67,7 @@ export default class AnimatedView extends Component {
                         : {
                             left: anim.interpolate({
                                 inputRange: [ 0, 1 ],
-                                outputRange: [ 0, Dimensions.get('window').width ]
+                                outputRange: [ 0, 300 ]
                             })
                         }
                 ]}
@@ -90,7 +92,7 @@ export default class AnimatedView extends Component {
                         ? {
                             left: anim.interpolate({
                                 inputRange: [ 0, 1 ],
-                                outputRange: [ Dimensions.get('window').width, 0 ]
+                                outputRange: [ 300, 0 ]
                             })
                         }
                         : {
@@ -113,6 +115,7 @@ export default class AnimatedView extends Component {
         const oldChild = prevLocation ? prevPage(prevLocation.pathname) : children;
         const newChild = prevLocation ?  children : null;
 
+<<<<<<< HEAD
         if (direction === 'forward') {
             return (
                 <View>
@@ -139,6 +142,39 @@ export default class AnimatedView extends Component {
             );
         }
 
+=======
+        return (
+            <Wrapper>
+                {animating
+                    ? this.renderAnimatedOld(oldChild)
+                    : this.renderStatic(oldChild)}
+
+                {animating
+                    ? this.renderAnimatedNew(newChild)
+                    : null}
+            </Wrapper>
+        );
+    }
+
+    renderBackward = () => {
+        const { children, prevPage } = this.props;
+        const { prevLocation, animating } = this.state;
+
+        const oldChild = prevLocation ? prevPage(prevLocation.pathname) : children;
+        const newChild = prevLocation ?  children : null;
+
+        return (
+            <Wrapper>
+                {animating
+                    ? this.renderAnimatedNew(newChild)
+                    : null}
+
+                {animating
+                    ? this.renderAnimatedOld(oldChild)
+                    : this.renderStatic(oldChild)}
+            </Wrapper>
+        );
+>>>>>>> be9a8ce9a20cb1b2878f59ed68d6987d0c15fba1
     }
 
     render() {

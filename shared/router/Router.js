@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Animated } from 'react-native';
-import { Switch, Route, withRouter } from 'react-router-native';
+import { Switch, Route, withRouter, Link } from 'react-router-native';
+import { Navigation, Card } from 'react-router-navigation'
 
 import Home      from '../components/pages/Home.js';
 import SomePage1 from '../components/pages/SomePage1.js';
